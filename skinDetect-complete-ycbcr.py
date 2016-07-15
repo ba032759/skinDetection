@@ -65,7 +65,7 @@ def calculateUpperAndLowerBounds(image):
     b_sd = calculateSD(b, b_mean)
     c_mean = calculateMean(c)
     c_sd = calculateSD(c, c_mean)
-    lowerBound = cv.Scalar(0, b_mean - b_sd*2, c_mean - c_sd*2)
+    lowerBound = cv.Scalar(a_mean - a_sd, b_mean - b_sd*2, c_mean - c_sd*2)
     upperBound = cv.Scalar(a_mean + a_sd*2, b_mean + b_sd*2, c_mean + c_sd*2)
     # 1 1 1
     # 2 1 1
@@ -73,8 +73,10 @@ def calculateUpperAndLowerBounds(image):
 
 
 
-img = cv2.imread('test.jpg')
+#img = cv2.imread('test.jpg')
+#img = cv2.imread('rock2.jpg')
 #img = cv2.imread('test2.jpg')
+img = cv2.imread('paper2.jpg')
 #img = cv2.imread('kate-upton.jpg')
 
 gray_conv = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -91,6 +93,7 @@ cv2.rectangle(img_tmp, (x, int(y * 0.5)), (x + w, y + int(h*1.5)), (0, 0, 0), -1
 mask = cv2.inRange(img_tmp, lower, upper)
 skinRegion = cv2.bitwise_and(img_tmp, img_tmp, mask=mask)
 
+cv2.imshow('skin', skinRegion)
 
 # Do contour detection on skin region
 contours, hierarchy = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)

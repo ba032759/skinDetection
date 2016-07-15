@@ -140,8 +140,9 @@ def removeFromGray(image, inner_gray):
 
 
 #img = cv2.imread('test.jpg')
-img = cv2.imread('test2.jpg')
+#img = cv2.imread('test2.jpg')
 #img = cv2.imread('kate-upton.jpg')
+img = cv2.imread('scissors.jpg')
 
 gray_conv = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 gray, color = faceDetection(img, gray_conv)
@@ -152,8 +153,8 @@ mask = cv2.inRange(img, cv.Scalar(lower_gray, 0, 0), cv.Scalar(upper_gray, 255, 
 result = cv2.bitwise_and(img, img, mask=mask)
 cv2.imshow('gray', result)
 
-img_tmp = cv2.cvtColor(result, cv2.COLOR_BGR2YUV)
-color = cv2.cvtColor(color, cv2.COLOR_BGR2YUV)
+#img_tmp = cv2.cvtColor(result, cv2.COLOR_BGR2YUV)
+#color = cv2.cvtColor(color, cv2.COLOR_BGR2YUV)
 
 #img_tmp = cv2.cvtColor(result, cv2.COLOR_BGR2HSV)
 #color = cv2.cvtColor(color, cv2.COLOR_BGR2HSV)
@@ -164,8 +165,8 @@ color = cv2.cvtColor(color, cv2.COLOR_BGR2YUV)
 #img_tmp = cv2.cvtColor(result, cv2.COLOR_BGR2LUV)
 #color = cv2.cvtColor(color, cv2.COLOR_BGR2LUV)
 
-#img_tmp = convertTo_rgR(result)
-#color = convertTo_rgR(color)
+img_tmp = convertTo_rgR(result)
+color = convertTo_rgR(color)
 
 lower, upper = calculateUpperAndLowerBounds(color)
 mask = cv2.inRange(img_tmp, lower, upper)
